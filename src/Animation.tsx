@@ -4,8 +4,7 @@
  * @time：2018/6/8 22:28
  */
 import * as React from "react";
-
-
+import "web-library/lib/polyfills/animationFrame";
 
 
 export declare interface IPosition{
