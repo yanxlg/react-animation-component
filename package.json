@@ -1,0 +1,41 @@
+{
+    "name": "react-animation-component",
+    "version": "0.1.0",
+    "author": "yanxianliang",
+    "description": "react animation component without animation lib",
+    "license": "MIT",
+    "engines": {
+        "node": ">=6"
+    },
+    "dependencies": {
+        "react": "^16.4.0",
+        "react-dom": "^16.4.0",
+        "react-scripts-ts": "2.16.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:yanxlg/react-animation-component.git"
+    },
+    "scripts": {
+        "start": "react-scripts-ts start",
+        "build": "react-scripts-ts build",
+        "test": "react-scripts-ts test --env=jsdom",
+        "eject": "react-scripts-ts eject",
+        "prepublish": "rc-tools run guard",
+        "pub": "rc-tools run pub --babel-runtime",
+        "compile":"rc-tools run compile"
+    },
+    "files": [
+        "lib",
+        "es",
+        "dist"
+    ],
+    "devDependencies": {
+        "@types/jest": "^23.0.0",
+        "@types/node": "^10.3.2",
+        "@types/react": "^16.3.17",
+        "@types/react-dom": "^16.0.6",
+        "typescript": "^2.9.1",
+        "rc-tools":"^8.0.1"
+    }
+}
