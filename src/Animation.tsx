@@ -146,10 +146,10 @@ class Animation extends React.Component<IAnimationProps>{
     private cloneElement=(ref:(ref:any)=>void,className:string,style:any,events:any)=>{
         const {children} =this.props;
         if(children){
-            return React.cloneElement(children,{
-                className:(children.props.className||"") + " "+className,
+            return React.cloneElement(children as any,{
+                className:((children as any).props.className||"") + " "+className,
                 ref:ref,
-                style:Object.assign({},children.props.style||{},style),
+                style:Object.assign({},(children as any).props.style||{},style),
                 ...events
             });
         }else{
