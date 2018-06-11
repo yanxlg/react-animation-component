@@ -53,6 +53,6 @@
         "babel-runtime": "6.x",
         "react": "^16.4.0",
         "react-dom": "^16.4.0",
-        "react-scripts-ts": "2.16.0",
+        "react-scripts-ts": "2.16.0"
     }
 }
