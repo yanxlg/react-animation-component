@@ -1,6 +1,6 @@
 {
     "name": "react-animation-component",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "author": "yanxianliang",
     "description": "react animation component without animation lib",
     "license": "MIT",
@@ -8,7 +8,7 @@
         "node": ">=6"
     },
     "dependencies": {
-        "web-library": "^0.1.0"
+        "web-library":"^0.1.1"
     },
     "repository": {
         "type": "git",
