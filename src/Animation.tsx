@@ -84,7 +84,7 @@ class Animation extends React.Component<IAnimationProps>{
             if(this.wrapElement){
                 window.getComputedStyle(this.wrapElement).top;
                 this.wrapElement.style.transform=`translate3d(0,0,0)${start&&void 0 !==start.scale?" scale(1)":""}`;
-                start&&start.opacity&&(this.wrapElement.style.opacity="1")
+                start&&void 0!==start.opacity&&(this.wrapElement.style.opacity="1")
             }
         }
     }
@@ -96,7 +96,7 @@ class Animation extends React.Component<IAnimationProps>{
             this.enterOrLeave="";
             window.requestAnimationFrame(()=>{
                 this.wrapElement.style.transform=`translate3d(0,0,0)${start&&void 0 !==start.scale?" scale(1)":""}`;
-                start&&start.opacity&&(this.wrapElement.style.opacity="1");
+                start&&void 0!==start.opacity&&(this.wrapElement.style.opacity="1");
             });
         }
     }
@@ -147,6 +147,7 @@ class Animation extends React.Component<IAnimationProps>{
     }
     private cloneElement=(ref:(ref:any)=>void,className:string,style:any,events:any)=>{
         const {children} =this.props;
+        //不一定是起始的样式，可能是结束的样式
         if(children){
             return React.cloneElement(children as any,{
                 className:((children as any).props.className||"") + " "+className,
@@ -175,15 +176,29 @@ class Animation extends React.Component<IAnimationProps>{
                 transY=end.bottom-start.bottom;
             }
         }
-        return {
-            ...end?end:{},
-            transform:`translate3d(${transX}px,${transY}px,0)${start&&void 0 !==start.scale?` scale(${start.scale})`:""}`,
-            ...delay?{transitionDelay:delay+"ms"}:{},
-            transitionDuration:duration+"ms",
-            transitionProperty:"transform",
-            transitionTimingFunction:timing,
-            ...origin?{transformOrigin:origin}:{},
-            ...start&&start.opacity?{opacity:start.opacity}:{},
+        
+        //TODO 如果不是enter则计算终点样式
+        if(this.enterOrLeave==="enter"){
+            return {
+                ...end?end:{},
+                transform:`translate3d(${transX}px,${transY}px,0)${start&&void 0 !==start.scale?` scale(${start.scale})`:""}`,
+                ...delay?{transitionDelay:delay+"ms"}:{},
+                transitionDuration:duration+"ms",
+                transitionProperty:"transform,opacity",
+                transitionTimingFunction:timing,
+                ...origin?{transformOrigin:origin}:{},
+                ...start&&void 0!==start.opacity?{opacity:start.opacity}:{},
+            }
+        }else{
+            return {
+                ...end?end:{},
+                transform:`translate3d(0,0,0)${start&&void 0 !==start.scale?` scale(1)`:""}`,
+                ...delay?{transitionDelay:delay+"ms"}:{},
+                transitionDuration:duration+"ms",
+                transitionProperty:"transform,opacity",
+                transitionTimingFunction:timing,
+                ...origin?{transformOrigin:origin}:{},
+            }
         }
     };
     private calcRevert=(props:IAnimationProps)=>{
@@ -207,10 +222,10 @@ class Animation extends React.Component<IAnimationProps>{
             transform:`translate3d(${transX}px,${transY}px,0)${start&&void 0 !==start.scale?` scale(${start.scale})`:""}`,
             ...delay?{transitionDelay:delay+"ms"}:{},
             transitionDuration:duration+"ms",
-            transitionProperty:"transform",
+            transitionProperty:"transform,opacity",
             transitionTimingFunction:timing,
             ...origin?{transformOrigin:origin}:{},
-            ...start&&start.opacity?{opacity:start.opacity}:{},
+            ...start&&void 0!==start.opacity?{opacity:start.opacity}:{},
         }
     };
     private onAnimationEnd=(e:any)=>{
