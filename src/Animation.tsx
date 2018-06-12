@@ -83,7 +83,7 @@ class Animation extends React.Component<IAnimationProps>{
         if(children&&animType==="css"){
             if(this.wrapElement){
                 window.getComputedStyle(this.wrapElement).top;
-                this.wrapElement.style.transform=`translate3d(0,0,0)${start&&start.scale?" scale(1)":""}`;
+                this.wrapElement.style.transform=`translate3d(0,0,0)${start&&void 0 !==start.scale?" scale(1)":""}`;
                 start&&start.opacity&&(this.wrapElement.style.opacity="1")
             }
         }
@@ -95,7 +95,7 @@ class Animation extends React.Component<IAnimationProps>{
             window.getComputedStyle(this.wrapElement).top;
             this.enterOrLeave="";
             window.requestAnimationFrame(()=>{
-                this.wrapElement.style.transform=`translate3d(0,0,0)${start&&start.scale?" scale(1)":""}`;
+                this.wrapElement.style.transform=`translate3d(0,0,0)${start&&void 0 !==start.scale?" scale(1)":""}`;
                 start&&start.opacity&&(this.wrapElement.style.opacity="1");
             });
         }
@@ -177,7 +177,7 @@ class Animation extends React.Component<IAnimationProps>{
         }
         return {
             ...end?end:{},
-            transform:`translate3d(${transX}px,${transY}px,0)${start&&start.scale?` scale(${start.scale})`:""}`,
+            transform:`translate3d(${transX}px,${transY}px,0)${start&&void 0 !==start.scale?` scale(${start.scale})`:""}`,
             ...delay?{transitionDelay:delay+"ms"}:{},
             transitionDuration:duration+"ms",
             transitionProperty:"transform",
@@ -204,7 +204,7 @@ class Animation extends React.Component<IAnimationProps>{
             }
         }
         return {
-            transform:`translate3d(${transX}px,${transY}px,0)${start&&start.scale?` scale(${start.scale})`:""}`,
+            transform:`translate3d(${transX}px,${transY}px,0)${start&&void 0 !==start.scale?` scale(${start.scale})`:""}`,
             ...delay?{transitionDelay:delay+"ms"}:{},
             transitionDuration:duration+"ms",
             transitionProperty:"transform",
