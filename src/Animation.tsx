@@ -4,6 +4,7 @@
  * @time：2018/6/8 22:28
  */
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import "web-library/lib/polyfills/animationFrame";
 
 
@@ -60,7 +61,7 @@ const animationEnd=(()=>{
 class Animation extends React.Component<IAnimationProps>{
     private enterOrLeave:"enter"|"leave"|"";
     private shouldUpdateFlag:boolean = true;
-    private wrapElement:HTMLDivElement;
+    private wrapElement:any;
     constructor(props:IAnimationProps){
         super(props);
         if(props.children){
@@ -73,7 +74,7 @@ class Animation extends React.Component<IAnimationProps>{
         const event = animType==="class"?(this.enterOrLeave==="enter"?{onAnimationEnd:this.onAnimationEnd}:{}):(this.enterOrLeave==="enter"?{onTransitionEnd:this.onTransitionEnd}:{});
         
         // children clone
-        return children?this.cloneElement((ref:HTMLDivElement)=>this.wrapElement=ref,enterClass,style,event):null;
+        return children?this.cloneElement((ref:HTMLDivElement)=>this.wrapElement=ReactDOM.findDOMNode(ref),enterClass,style,event):null;
         
         // return children?<div ref={(ref:HTMLDivElement)=>this.wrapElement=ref} className={(className||"")+(enterClass||"")} style={style} {...event}>{children}</div>:null;
     }
@@ -89,6 +90,7 @@ class Animation extends React.Component<IAnimationProps>{
     }
     public componentDidUpdate(){
         const {animType,start} = this.props;
+        
         if(this.enterOrLeave==="enter"&&animType==="css"){
             window.getComputedStyle(this.wrapElement).top;
             this.enterOrLeave="";
