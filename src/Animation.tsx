@@ -2,6 +2,7 @@
  * @disc:动画库
  * @author:yanxinaliang
  * @time：2018/6/8 22:28
+ * fix bug transitionEnd 未触发时执行关闭操作  需要优化
  */
 import * as React from "react";
 import * as ReactDOM from "react-dom";
