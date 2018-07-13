@@ -92,7 +92,7 @@ class Animation extends React.Component<IAnimationProps>{
     public componentDidUpdate(){
         const {animType,start} = this.props;
         
-        if(this.enterOrLeave==="enter"&&animType==="css"){
+        if(this.enterOrLeave==="enter"&&animType==="css"&&this.wrapElement){
             window.getComputedStyle(this.wrapElement).top;
             this.enterOrLeave="";
             window.requestAnimationFrame(()=>{
