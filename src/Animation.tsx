@@ -91,13 +91,13 @@ class Animation extends React.Component<IAnimationProps>{
     }
     public componentDidUpdate(){
         const {animType,start} = this.props;
-        
-        if(this.enterOrLeave==="enter"&&animType==="css"&&this.wrapElement){
-            window.getComputedStyle(this.wrapElement).top;
+        const __this=this;
+        if(this.enterOrLeave==="enter"&&animType==="css"&&__this.wrapElement){
+            this.wrapElement&&window.getComputedStyle(__this.wrapElement).top;
             this.enterOrLeave="";
             window.requestAnimationFrame(()=>{
-                this.wrapElement.style.transform=`translate3d(0,0,0)${start&&void 0 !==start.scale?" scale(1)":""}`;
-                start&&void 0!==start.opacity&&(this.wrapElement.style.opacity="1");
+                __this.wrapElement&&(__this.wrapElement.style.transform=`translate3d(0,0,0)${start&&void 0 !==start.scale?" scale(1)":""}`);
+                start&&void 0!==start.opacity&&__this.wrapElement&&(__this.wrapElement.style.opacity="1");
             });
         }
     }
